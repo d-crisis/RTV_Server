@@ -1,0 +1,1 @@
+Inserire nome del DB = rtv_db e utf8_unicode_ci
