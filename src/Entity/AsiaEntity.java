@@ -11,46 +11,74 @@ public class AsiaEntity {
     private double latitude;
     private double longitude;
 
+    /**
+     * @return
+     */
     @Id
     @Column(name = "id")
     public long getId() {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     * @return
+     */
     @Basic
     @Column(name = "nome")
     public String getNome() {
         return nome;
     }
 
+    /**
+     * @param nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     * @return
+     */
     @Basic
     @Column(name = "latitude")
     public double getLatitude() {
         return latitude;
     }
 
+    /**
+     * @param latitude
+     */
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
+    /**
+     * @return
+     */
     @Basic
     @Column(name = "longitude")
     public double getLongitude() {
         return longitude;
     }
 
+    /**
+     * @param longitude
+     */
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
+    /**
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,6 +90,9 @@ public class AsiaEntity {
                 Objects.equals(nome, that.nome);
     }
 
+    /**
+     * @return
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, nome, latitude, longitude);

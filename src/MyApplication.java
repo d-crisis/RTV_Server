@@ -9,6 +9,9 @@ import java.util.Set;
 @ApplicationPath("/")
 //The java class declares root resource and provider classes
 public class MyApplication extends Application{
+    /**
+     * @return
+     */
     //The method returns a non-empty collection with classes, that must be included in the published JAX-RS application
     @Override
     public Set<Class<?>> getClasses() {

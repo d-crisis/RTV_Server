@@ -17,6 +17,9 @@ import java.util.Map;
 
 @Path("/asia")
 public class apiAsia {
+    /**
+     * @return
+     */
     @GET
 
     @Produces({MediaType.APPLICATION_JSON})

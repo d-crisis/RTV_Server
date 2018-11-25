@@ -19,6 +19,10 @@ public class HibernateUtil {
         }
     }
 
+    /**
+     * @return
+     * @throws HibernateException
+     */
     public static Session getSession() throws HibernateException {
         return ourSessionFactory.openSession();
     }
