@@ -1,3 +1,4 @@
+USE rtv_db;
 CREATE TABLE asia (
   id serial NOT NULL,
   nome varchar(20),

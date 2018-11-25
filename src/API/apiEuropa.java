@@ -1,36 +1,37 @@
 package API;
 
 import Entity.EuropaEntity;
-import org.hibernate.query.Query;
 import Util.HibernateUtil;
+import org.hibernate.query.Query;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Path("/europa")
 public class apiEuropa {
 
     @GET
-
     @Produces({MediaType.APPLICATION_JSON})
 
-    public List<EuropaEntity> getInfoMappa(){
+    public Response getInfoMappa(){
         List<EuropaEntity> normaleEntitiesOut;
+        Map<String,List> json =new HashMap<>();
         try {
-            Query query= HibernateUtil.getSession().createQuery("FROM EuropaEntity");
+            Query query= HibernateUtil.getSession().createQuery("FROM EuropaEntity");;
             List<EuropaEntity> normaleEntities = query.list();
-
-            for (EuropaEntity norm : normaleEntities){
-                System.out.println("nome: " + norm.getNome() + "," +"latitudine: " + norm.getLatitude() + "," + "longitudine: " + norm.getLongitude() + ",");
-            }
             normaleEntitiesOut = normaleEntities;
+            json.put("mappa",normaleEntitiesOut);
         } finally {
             HibernateUtil.getSession().close();
+            return Response.ok(json).build();
         }
-        return normaleEntitiesOut;
+
     }
 
 }

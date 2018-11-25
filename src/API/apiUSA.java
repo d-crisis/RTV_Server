@@ -8,7 +8,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Path("/usa")
 public class apiUSA {
@@ -16,19 +19,18 @@ public class apiUSA {
 
     @Produces({MediaType.APPLICATION_JSON})
 
-    public List<UsaEntity> getInfoMappa(){
+    public Response getInfoMappa(){
         List<UsaEntity> normaleEntitiesOut;
+        Map<String,List> json =new HashMap<>();
         try {
             Query query= HibernateUtil.getSession().createQuery("FROM UsaEntity");
             List<UsaEntity> normaleEntities = query.list();
-
-            for (UsaEntity norm : normaleEntities){
-                System.out.println("nome: " + norm.getNome() + "," +"latitudine: " + norm.getLatitude() + "," + "longitudine: " + norm.getLongitude() + ",");
-            }
             normaleEntitiesOut = normaleEntities;
+            json.put("mappa",normaleEntitiesOut);
         } finally {
             HibernateUtil.getSession().close();
+            return Response.ok(json).build();
         }
-        return normaleEntitiesOut;
+
     }
 }

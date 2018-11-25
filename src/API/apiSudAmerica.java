@@ -8,26 +8,29 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Path("/sudamerica")
 public class apiSudAmerica {
 @GET
 
 @Produces({MediaType.APPLICATION_JSON})
 
-public List<SudAmericaEntity> getInfoMappa(){
+public Response getInfoMappa(){
     List<SudAmericaEntity> normaleEntitiesOut;
+    Map<String,List> json =new HashMap<>();
     try {
         Query query= HibernateUtil.getSession().createQuery("FROM SudAmericaEntity");
         List<SudAmericaEntity> normaleEntities = query.list();
-
-        for (SudAmericaEntity norm : normaleEntities){
-            System.out.println("nome: " + norm.getNome() + "," +"latitudine: " + norm.getLatitude() + "," + "longitudine: " + norm.getLongitude() + ",");
-        }
         normaleEntitiesOut = normaleEntities;
+        json.put("mappa",normaleEntitiesOut);
     } finally {
         HibernateUtil.getSession().close();
+        return Response.ok(json).build();
     }
-    return normaleEntitiesOut;
+
 }
 }
