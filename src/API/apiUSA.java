@@ -1,8 +1,8 @@
 package API;
 
+import Controller.Controller;
 import Entity.UsaEntity;
 import Util.HibernateUtil;
-import org.hibernate.query.Query;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -26,9 +26,7 @@ public class apiUSA {
         List<UsaEntity> normaleEntitiesOut;
         Map<String,List> json =new HashMap<>();
         try {
-            Query query= HibernateUtil.getSession().createQuery("FROM UsaEntity");
-            List<UsaEntity> normaleEntities = query.list();
-            normaleEntitiesOut = normaleEntities;
+            normaleEntitiesOut = new Controller().queryUsa();
             json.put("mappa",normaleEntitiesOut);
         } finally {
             HibernateUtil.getSession().close();
