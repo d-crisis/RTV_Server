@@ -2,7 +2,6 @@ package API;
 
 import Controller.Controller;
 import Entity.AfricaEntity;
-import Util.HibernateUtil;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -27,14 +26,9 @@ public class apiAfrica {
     public Response getInfoMappa(){
         List<AfricaEntity> normaleEntitiesOut;
         Map<String,List> json =new HashMap<>();
-        try {
-            normaleEntitiesOut = new Controller().queryAfrica();
-            json.put("mappa",normaleEntitiesOut);
-        } finally {
-            HibernateUtil.getSession().close();
-            return Response.ok(json).build();
-        }
-
+        normaleEntitiesOut = new Controller().queryAfrica();
+        json.put("mappa",normaleEntitiesOut);
+        return Response.ok(json).build();
     }
 
 }
